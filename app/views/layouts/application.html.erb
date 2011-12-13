@@ -12,7 +12,16 @@
 	<h1>Toy Twitter App</h1>
 </div>
 <h2><%= notice %></h2>
-<p><%= link_to "Sign In", '/auth/twitter' %></p>
+
+<div id="user_nav">
+	<% if current_user%>
+	Welcome <%= current_user.name %>
+	<%= link_to "Sign Out", signout_path %>
+	<% else %>
+		<%= link_to "Sign In with Twitter", '/auth/twitter' %>
+	<% end %>
+
+</div>
 
 # Get the most recent tweets from the Timeline
 <%= Twitter.home_timeline %>

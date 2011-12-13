@@ -19,7 +19,8 @@ class SessionsController < ApplicationController
     # Get the most recent tweets from the Timeline
     most_recent_tweets = Twitter.home_timeline
     
-    user = User.find_by_uid(twitter_user_id)
+    user = User.find_by_provider_and_uid(data['provider'], data['uid'])|| User.create_with_omniauth(data)
+    #user = User.find_by_uid(twitter_user_id)
     if user
       session[:user_id] = user.id
       redirect_to root_url, :notice => "#{name} signed in"
@@ -32,6 +33,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session[:user_id] = nil
+    redirect_to root_url, :notice => "Signed out!"
   end
 
 end
