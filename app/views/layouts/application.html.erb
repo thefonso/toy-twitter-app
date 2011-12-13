@@ -13,7 +13,8 @@
 </div>
 <h2><%= notice %></h2>
 <p><%= link_to "Sign In", '/auth/twitter' %></p>
-<%= yield %>
 
+# Get the most recent tweets from the Timeline
+<%= Twitter.home_timeline %>
 </body>
 </html>
