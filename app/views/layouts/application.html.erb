@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Birdie</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="header">
+	<h1>Toy Twitter App</h1>
+</div>
+<h2><%= notice %></h2>
+<p><%= link_to "Sign In", '/auth/twitter' %></p>
+<%= yield %>
+
+</body>
+</html>
