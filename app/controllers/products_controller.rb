@@ -3,6 +3,10 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+    
+    # Get the most recent tweets from the Timeline
+    @most_recent_tweets = Twitter.home_timeline if session[:user_id]
+    
 
     respond_to do |format|
       format.html # index.html.erb

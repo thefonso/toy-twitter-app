@@ -15,9 +15,6 @@ class SessionsController < ApplicationController
     Twitter.consumer_secret = 'nMrQocQAizOfUXqfezvqehRSAVIdzyyy4tT4L4ghJ4'
     Twitter.oauth_token = data['credentials']['token']
     Twitter.oauth_token_secret = data['credentials']['secret']
-
-    # Get the most recent tweets from the Timeline
-    most_recent_tweets = Twitter.home_timeline
     
     user = User.find_by_provider_and_uid(data['provider'], data['uid'])|| User.create_with_omniauth(data)
     #user = User.find_by_uid(twitter_user_id)

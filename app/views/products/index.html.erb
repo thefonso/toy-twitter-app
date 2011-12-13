@@ -1,4 +1,4 @@
-<h1>Listing products</h1>
+<h1>Listing Tweets</h1>
 
 <table>
   <tr>
@@ -21,3 +21,6 @@
 <br />
 
 <%= link_to 'New Product', new_product_path %>
+<% @most_recent_tweets.each do |tweet| %>
+	<%= tweet %>
+<% end %>

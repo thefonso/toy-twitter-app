@@ -20,10 +20,13 @@
 	<% else %>
 		<%= link_to "Sign In with Twitter", '/auth/twitter' %>
 	<% end %>
+	
 
 </div>
 
-# Get the most recent tweets from the Timeline
-<%= Twitter.home_timeline %>
+Get the most recent tweets from the Timeline
+
+<%= yield %>
+
 </body>
 </html>
