@@ -25,13 +25,14 @@ class SessionsController < ApplicationController
       user = User.create(:uid => twitter_user_id, :provider => provider, :name => name,
               :image => image, :token => Twitter.oauth_token, :secret => Twitter.oauth_token_secret)
       session[:user_id] = user.id
-      redirect_to root_url, :notice => "Hi #{name}, welcome"
+      redirect_to root_url, :notice => "Hi #{name}, thanks for signing in"
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, :notice => "Signed out!"
+    Twitter.end_session
+    redirect_to root_url, :notice => "Signed out! pong"
   end
 
 end

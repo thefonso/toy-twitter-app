@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
     @products = Product.all
     
     # Get the most recent tweets from the Timeline
-    @most_recent_tweets = Twitter.home_timeline if session[:user_id]
+    @most_recent_tweets = Twitter.home_timeline if session[:user_id] != nil
     
 
     respond_to do |format|
