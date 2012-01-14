@@ -1,13 +1,26 @@
 class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
+
+  
   def index
     @products = Product.all
     
-    # Get the most recent tweets from the Timeline
-    @most_recent_tweets = Twitter.home_timeline if session[:user_id] != nil
     
-
+    # Get the most recent tweets from the Timeline
+    if session[:user_id] != nil then
+      
+      if params[:my_tweet] != nil then
+        Twitter.update(params[:my_tweet]) 
+        @most_recent_tweets = Twitter.home_timeline(count:3) 
+      else
+        @most_recent_tweets = Twitter.home_timeline(count:3) 
+        @followers = Twitter.follower_ids
+      end
+      
+    else
+      # TODO display an error message
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }
@@ -44,17 +57,18 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(params[:product])
-
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render json: @product, status: :created, location: @product }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
+    
+    # @product = Product.new(params[:product])
+    # 
+    #     respond_to do |format|
+    #       if @product.save
+    #         format.html { redirect_to @product, notice: 'Product was successfully created.' }
+    #         format.json { render json: @product, status: :created, location: @product }
+    #       else
+    #         format.html { render action: "new" }
+    #         format.json { render json: @product.errors, status: :unprocessable_entity }
+    #       end
+    #     end
   end
 
   # PUT /products/1

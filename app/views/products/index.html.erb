@@ -2,12 +2,37 @@
 
 
 <br />
-Get the most recent tweets from the Timeline
 
-
-<br/><br/>
 <% if current_user%>
-	<% @most_recent_tweets.each do |tweet| %>
-		<%= tweet["attrs"]["text"] %><br />
+	Post
+	<br /><br />
+	<%= form_tag tweet_path do %>
+	<fieldset>
+		<legend>140 char limit</legend>
+		<div>
+			<label for="mytweet">mytweet:</label>
+			<%= text_field_tag :my_tweet, params[:my_tweet], :maxlength => 140 %>
+		</div>
+		<div>
+			<%= submit_tag "tweet" %>
+		</div>
+	</fieldset>
 	<% end %>
+
+	
+	Get the most recent tweets from the Timeline
+	<br/><br/>
+	<% @most_recent_tweets.each do |tweet| %>
+	<!-- note: use tweet["attrs"] to see all objects-->
+		<%= image_tag (tweet["user"]["profile_image_url"].html_safe) %>-<%= tweet["user"]["name"] %>-<%= tweet["attrs"]["text"] %><br /><br />
+	<% end %>
+	
+
+	
 <% end %>
+
+
+
+
+
+

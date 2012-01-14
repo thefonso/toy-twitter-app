@@ -11,13 +11,17 @@ class SessionsController < ApplicationController
     logger.debug "Name looks to be: #{name}"
     
     # Set all necessary auth info (I think these are MY keys that exist in omniauth.rb)
-    Twitter.consumer_key = 'HlVU1IJ6MWv7uPLe6h5Zw'
-    Twitter.consumer_secret = 'nMrQocQAizOfUXqfezvqehRSAVIdzyyy4tT4L4ghJ4'
+    # NOTE these are for the twitter gem NOT Omniauth
+    #
+    # TODO how to hide the key and secret lines?...
+    Twitter.consumer_key = 'uNi2i7MxLlwjrGuNSAwzw'
+    Twitter.consumer_secret = '4bd03PWG5jFBkfPHrXR1UeaXNQkDXBnApkBprNDSaA'
     Twitter.oauth_token = data['credentials']['token']
     Twitter.oauth_token_secret = data['credentials']['secret']
-    
-    user = User.find_by_provider_and_uid(data['provider'], data['uid'])|| User.create_with_omniauth(data)
-    #user = User.find_by_uid(twitter_user_id)
+    # I don't recall why I put this here for user...
+    #user = User.find_by_provider_and_uid(data['provider'], data['uid'])|| User.create_with_omniauth(data)
+    #the below user string is from Jeff's tutorial..
+    user = User.find_by_uid(twitter_user_id)
     if user
       session[:user_id] = user.id
       redirect_to root_url, :notice => "#{name} signed in"
@@ -32,7 +36,7 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     Twitter.end_session
-    redirect_to root_url, :notice => "Signed out! pong"
+    redirect_to root_url, :notice => "Signed out!"
   end
 
 end

@@ -1,4 +1,5 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :twitter, "HlVU1IJ6MWv7uPLe6h5Zw", "nMrQocQAizOfUXqfezvqehRSAVIdzyyy4tT4L4ghJ4" 
+  # TODO how to hide the key and secret?...
+  provider :twitter, "uNi2i7MxLlwjrGuNSAwzw", "4bd03PWG5jFBkfPHrXR1UeaXNQkDXBnApkBprNDSaA" 
   # provider :twitter, "consumer_key", "consumer_secret" 
 end
