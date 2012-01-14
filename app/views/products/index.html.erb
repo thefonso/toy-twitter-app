@@ -27,7 +27,11 @@
 		<%= image_tag (tweet["user"]["profile_image_url"].html_safe) %>-<%= tweet["user"]["name"] %>-<%= tweet["attrs"]["text"] %><br /><br />
 	<% end %>
 	
-
+	Followers:
+		<br/><br/>
+		<%  @followers.ids.each do |followid| %>
+			<%=  Twitter.user(followid).name %>
+		<% end %>
 	
 <% end %>
 
