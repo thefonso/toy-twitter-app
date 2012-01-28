@@ -11,7 +11,7 @@
 		<legend>140 char limit</legend>
 		<div>
 			<label for="mytweet">mytweet:</label>
-			<%= text_field_tag :my_tweet, params[:my_tweet], :maxlength => 140 %>
+			<%= text_field_tag :my_tweet, params[:my_tweet], :maxlength => 200 %>
 		</div>
 		<div>
 			<%= submit_tag "tweet" %>
@@ -27,11 +27,7 @@
 		<%= image_tag (tweet["user"]["profile_image_url"].html_safe) %>-<%= tweet["user"]["name"] %>-<%= tweet["attrs"]["text"] %><br /><br />
 	<% end %>
 	
-	Followers:
-		<br/><br/>
-		<%  @followers.ids.each do |followid| %>
-			<%=  Twitter.user(followid).name %>
-		<% end %>
+
 	
 <% end %>
 

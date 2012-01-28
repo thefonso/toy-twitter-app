@@ -4,20 +4,18 @@ class ProductsController < ApplicationController
 
   
   def index
-    @products = Product.all
+    @products = Product.all    
     
-    
-    # Get the most recent tweets from the Timeline
-    if session[:user_id] != nil then
-      
+    # Post tweets to Twitter
+    if session[:user_id] != nil then      
       if params[:my_tweet] != nil then
-        Twitter.update(params[:my_tweet]) 
+        #sends only the first 140 chars.
+        Twitter.update(params[:my_tweet][0...139])
         @most_recent_tweets = Twitter.home_timeline(count:3) 
       else
         @most_recent_tweets = Twitter.home_timeline(count:3) 
         @followers = Twitter.follower_ids
-      end
-      
+      end     
     else
       # TODO display an error message
     end
