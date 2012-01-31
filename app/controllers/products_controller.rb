@@ -9,10 +9,12 @@ class ProductsController < ApplicationController
     # Post tweets to Twitter
     if session[:user_id] != nil then      
       if params[:my_tweet] != nil then
-        #sends only the first 140 chars.
+        #sends only the first 140 chars out to Twitter.
         Twitter.update(params[:my_tweet][0...139])
         @most_recent_tweets = Twitter.home_timeline(count:3) 
       else
+        #NOTE: there is a created_at value in the hash tag see 
+        #https://dev.twitter.com/docs/api/1/get/statuses/home_timeline
         @most_recent_tweets = Twitter.home_timeline(count:3) 
         @followers = Twitter.follower_ids
       end     

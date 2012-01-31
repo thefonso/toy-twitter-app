@@ -1,6 +1,5 @@
 <h1>Listing Tweets</h1>
 
-
 <br />
 
 <% if current_user%>
@@ -23,11 +22,26 @@
 	Get the most recent tweets from the Timeline
 	<br/><br/>
 	<% @most_recent_tweets.each do |tweet| %>
-	<!-- note: use tweet["attrs"] to see all objects-->
-		<%= image_tag (tweet["user"]["profile_image_url"].html_safe) %>-<%= tweet["user"]["name"] %>-<%= tweet["attrs"]["text"] %><br /><br />
+		<!-- note: use tweet["attrs"] to see all objects-->
+		<%= image_tag (tweet["user"]["profile_image_url"].html_safe) %>-
+		<%= tweet["user"]["name"] %>-<%= tweet["attrs"]["text"] %>-<%= tweet["created_at"] %><br /><br />
+		<!-- save the tweets to DB -->
+		<!-- TODO if post_id is not unique do not save -->
+	
+			<% Savetweets.create(:username => tweet["user"]["name"], 
+			:userimageurl => tweet["user"]["profile_image_url"], :usertext => tweet["attrs"]["text"], 
+			:post_id => tweet["created_at"]) %>
+
 	<% end %>
 	
-
+	Display tweets in database
+	<br/><br/>
+		<!-- TODO pull fields from here -->
+		<% @savedtweets = Savetweets.all %>
+		<% @savedtweets.each do |dbtweet| %>
+			<%= image_tag (dbtweet.userimageurl.html_safe) %>-
+			<%= dbtweet.username %>-<%= dbtweet.usertext %>-<%= dbtweet.post_id %><br /><br />
+		<% end %>
 	
 <% end %>
 
