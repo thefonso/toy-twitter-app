@@ -26,12 +26,10 @@
 		<%= image_tag (tweet["user"]["profile_image_url"].html_safe) %>-
 		<%= tweet["user"]["name"] %>-<%= tweet["attrs"]["text"] %>-<%= tweet["created_at"] %><br /><br />
 		<!-- save the tweets to DB -->
-		<!-- TODO if post_id is not unique do not save -->
-	
+		<!-- TODO if post_id is not unique do not save -->	
 			<% Savetweets.create(:username => tweet["user"]["name"], 
 			:userimageurl => tweet["user"]["profile_image_url"], :usertext => tweet["attrs"]["text"], 
 			:post_id => tweet["created_at"]) %>
-
 	<% end %>
 	
 	Display tweets in database

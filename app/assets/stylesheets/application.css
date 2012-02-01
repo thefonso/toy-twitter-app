@@ -5,3 +5,73 @@
  *= require_self
  *= require_tree . 
 */
+#header{
+	border: 1px solid #094F99;
+	background-color: #094F99;
+	height: 60px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+#header .left{
+	border: 0px solid #991191;
+	float: left;
+	clear: none;
+	color: #DDD;text-shadow: #050505 2px 1px 3px;
+}
+#header .right{
+	border: 0px solid #991191;
+	float: right;
+	clear: none;
+	color: #F0F0F0
+}
+#header .right a{
+	color: #F0F0F0
+}
+#wrapper{
+	border: 1px solid #991191;
+/*	width: 100%;*/
+	min-height: 580px;
+/*	this is what centers the content*/
+/*	margin: 0em auto;*/
+}
+#leftside{
+	border: 0px solid #142099;
+	float: left;
+	width: 20%;
+	margin-top: 2em;
+	padding: 2em;
+}
+#mainstream{
+	border-right: 1px solid #990316;
+	border-left: 1px solid #990316;
+	float: left;
+	min-height: 500px;
+	width: 40%;
+	margin-top: 2em;
+	padding: 2em;
+/*	margin-bottom: 65px;*/
+}
+#rightside{
+	border: 0px solid #18991E;
+	float: left;
+	width: 20%;
+	margin-top: 2em;
+	padding-top: 2em;
+	padding-left: 2em;
+	padding-right: 0;
+}
+#footer{
+	border: 1px solid #094F99;
+	background-color: #094F99;
+	height: 30px;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 10px;
+	
+	clear: both;
+	text-align: center;
+	color: #F0F0F0
+}
+#footer a{
+	color: #F0F0F0	
+}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Birdie</title>
+  <title>Toy Twitter App</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -9,20 +9,48 @@
 <body>
 
 <div id="header">
-	<h1>Toy Twitter App</h1>
+	<div class="left">
+		<h1>Toy Twitter App</h1>
+	</div>
+	<div class="right">
+		<!-- in case of some errors display here -->
+		<h2><%= notice %></h2>
+		<% if current_user%>
+			Welcome
+			<h3><%= current_user.name %></h3>
+			<%= link_to "Sign Out", signout_path %>
+		<% else %>
+			<%= link_to "Sign In with Twitter", '/auth/twitter' %>
+		<% end %>
+	</div>	
 </div>
-<h2><%= notice %></h2>
 
-<div id="user_nav">
-	<% if current_user%>
-	Welcome <%= current_user.name %>
-	<%= link_to "Sign Out", signout_path %>
-	<% else %>
-		<%= link_to "Sign In with Twitter", '/auth/twitter' %>
-	<% end %>
+<div id="wrapper">
+	<div id="rightside">
+		<% if current_user%>
+			<%= image_tag (current_user.image.html_safe), :class => "bevel", :size => "80x80" %><br />
+			<h3><%= current_user.name %></h3><br />
+			Followers:<br />
+			<!-- TODO - extract followers from followers DB table -->
+		<% else %>
+			Followers:
+		<% end %>
+	</div>
+
+	<!-- this yield displays products/index.html.erb -->
+	<div id="mainstream">
+		<%= yield %>
+	</div>
+
+	<div id="leftside">
+		
+		Tweets 'bout me:<br /><br/>
+		Local trends:
+		
+	</div>
+</div> <!-- wrapper ends -->
+<div id="footer">
+	Toy Twitter App brought to you by - <%= link_to "thefonso",'thefonso.com' %>
 </div>
-
-<%= yield %>
-
 </body>
 </html>
