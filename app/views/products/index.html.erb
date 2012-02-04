@@ -1,47 +1,103 @@
-<h1>Listing Tweets</h1>
 
-<br />
 
-<% if current_user%>
-	Post
-	<br /><br />
-	<%= form_tag tweet_path do %>
-	<fieldset>
-		<legend>140 char limit</legend>
-		<div>
-			<label for="mytweet">mytweet:</label>
-			<%= text_field_tag :my_tweet, params[:my_tweet], :maxlength => 200 %>
-		</div>
-		<div>
-			<%= submit_tag "tweet" %>
-		</div>
-	</fieldset>
-	<% end %>
-
-	
-	Get the most recent tweets from the Timeline
-	<br/><br/>
-	<% @most_recent_tweets.each do |tweet| %>
-		<!-- note: use tweet["attrs"] to see all objects-->
-		<%= image_tag (tweet["user"]["profile_image_url"].html_safe) %>-
-		<%= tweet["user"]["name"] %>-<%= tweet["attrs"]["text"] %>-<%= tweet["created_at"] %><br /><br />
-		<!-- save the tweets to DB -->
-		<!-- TODO if post_id is not unique do not save -->	
-			<% Savetweets.create(:username => tweet["user"]["name"], 
-			:userimageurl => tweet["user"]["profile_image_url"], :usertext => tweet["attrs"]["text"], 
-			:post_id => tweet["created_at"]) %>
-	<% end %>
-	
-	Display tweets in database
-	<br/><br/>
-		<!-- TODO pull fields from here -->
-		<% @savedtweets = Savetweets.all %>
-		<% @savedtweets.each do |dbtweet| %>
-			<%= image_tag (dbtweet.userimageurl.html_safe) %>-
-			<%= dbtweet.username %>-<%= dbtweet.usertext %>-<%= dbtweet.post_id %><br /><br />
+<div id="header">
+	<div class="left">
+		<h1>Toy Twitter App</h1>
+	</div>
+	<div class="right">
+		<!-- in case of some errors display here -->
+		<% if current_user%>
+			Welcome
+			<%= current_user.name %>
+			<%= link_to "Sign Out", signout_path %>
+		<% else %>
+			<%= link_to "Sign In with Twitter", '/auth/twitter' %>
 		<% end %>
-	
-<% end %>
+	</div>	
+</div>
+
+<div id="wrapper">
+	<div id="rightside">
+		<% if current_user%>
+			<%= image_tag (current_user.image.html_safe), :size => 'bigger' %><br />
+			<h3><%= current_user.name %></h3><br />
+			Followers:<br />
+			<%  @followers.ids.each do |followid| %>
+			<!-- place followers into followers DB table -->
+				<% Followers.create(:username => Twitter.user(followid).name, 
+				:imageurl => Twitter.profile_image(followid, :size => 'mini'), 
+				:user_id => current_user.name, :follower_id => followid) %>				
+			<% end %>
+			<!-- TODO - extract followers from followers DB table -->
+			<% @followersdb.each do |fdb| %>
+				<%= image_tag (fdb.imageurl.html_safe), :size => 'mini' %>
+			<% end %>
+		<% else %>
+			<!-- display nothing -->
+		<% end %>
+	</div>
+
+	<!-- this yield displays products/index.html.erb -->
+	<div id="mainstream">
+		<% if current_user%>
+		<h1>Tweet Stream</h1>
+
+		<br />
+			<br /><br />
+			<%= form_tag tweet_path do %>
+			<fieldset>
+				<legend>140 char limit</legend>
+				<div>
+					<%= text_area :my_tweet, params[:my_tweet], :maxlength => 240, :rows => 6, :cols => 65 %>
+				</div>
+				<div>
+					<%= submit_tag "tweet" %>
+				</div>
+			</fieldset>
+			<% end %>
+
+			<br /><br />
+			Get the most recent tweets from the Timeline
+			<br/><br/>
+			<% @most_recent_tweets.each do |tweet| %>
+				<!-- note: use tweet["attrs"] to see all objects-->
+				<%= image_tag (tweet["user"]["profile_image_url"].html_safe) %>-
+				<%= tweet["user"]["name"] %>-<%= tweet["attrs"]["text"] %>-<%= tweet["created_at"] %><br /><br />
+				<!-- save the tweets to DB -->
+				<% Savetweets.create(:username => tweet["user"]["name"], 
+				:userimageurl => tweet["user"]["profile_image_url"], :usertext => tweet["attrs"]["text"], 
+				:post_id => tweet["created_at"]) %>
+			<% end %>
+			<br /><br />
+			Display tweets in database
+			<br/><br/>
+				<!-- TODO pull fields from here -->
+				<!-- NOTE this is pulling savedtweets from products_controller -->
+				<% @savedtweets.each do |dbtweet| %>
+					<%= image_tag (dbtweet.userimageurl.html_safe) %>-
+					<%= dbtweet.username %>-<%= dbtweet.usertext %>-<%= dbtweet.post_id %><br /><br />
+				<% end %>	
+		<% end %>
+	</div>
+
+	<div id="leftside">
+		<% if current_user%>
+			Mentions:<br />
+			<% Twitter.mentions(:count => 10).each do |ment| %>
+				<%= ment.attrs["user"]["screen_name"] %> - <%= ment.attrs["text"] %><br /><br />
+			<% end %>
+			<br/><br />
+			San Fran. Trends:<br />
+				<% Twitter.local_trends(2487956).each do |trend| %> 
+					<%= trend.attrs["name"] %>
+				<% end%>
+			<br />
+		<% end %>
+	</div>
+</div> <!-- wrapper ends -->
+<div id="footer">
+	Toy Twitter App brought to you by - <%= link_to "thefonso",'thefonso.com' %>
+</div>
 
 
 

@@ -16,8 +16,8 @@ class SessionsController < ApplicationController
     # NOTE these are for the twitter gem NOT Omniauth
     
     # TODO how to hide the key and secret lines?...
-    Twitter.consumer_key = 'uNi2i7MxLlwjrGuNSAwzw'
-    Twitter.consumer_secret = '4bd03PWG5jFBkfPHrXR1UeaXNQkDXBnApkBprNDSaA'
+    Twitter.consumer_key = 'UkQrfL3DAfoLxzJFkbZbHg'
+    Twitter.consumer_secret = '58pniCwUx67lW7TVR2xGH6qwgznTaWTgeodXZs4bLs8'
     Twitter.oauth_token = data['credentials']['token']
     Twitter.oauth_token_secret = data['credentials']['secret']
     # I don't recall why I put this here for user...
@@ -32,6 +32,7 @@ class SessionsController < ApplicationController
       # it's a new user put 'em in the database!
       user = User.create(:uid => twitter_user_id, :provider => provider, :name => name,
               :image => image, :token => Twitter.oauth_token, :secret => Twitter.oauth_token_secret)
+              
       session[:user_id] = user.id
       redirect_to root_url, :notice => "Hi #{name}, thanks for signing in"
     end

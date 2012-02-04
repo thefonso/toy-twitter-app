@@ -22,13 +22,14 @@
 	border: 0px solid #991191;
 	float: right;
 	clear: none;
-	color: #F0F0F0
+	color: #F0F0F0;
+	padding-top: 20px;
 }
 #header .right a{
 	color: #F0F0F0
 }
 #wrapper{
-	border: 1px solid #991191;
+	border: 0px solid #991191;
 /*	width: 100%;*/
 	min-height: 580px;
 /*	this is what centers the content*/

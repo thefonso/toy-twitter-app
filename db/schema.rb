@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128210304) do
+ActiveRecord::Schema.define(:version => 20120201015255) do
+
+  create_table "followers", :force => true do |t|
+    t.string   "username"
+    t.string   "imageurl"
+    t.string   "user_id"
+    t.string   "follower_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "followers", ["follower_id"], :name => "index_followers_on_follower_id", :unique => true
 
   create_table "products", :force => true do |t|
     t.string   "name"

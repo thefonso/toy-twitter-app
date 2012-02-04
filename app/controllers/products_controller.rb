@@ -5,7 +5,9 @@ class ProductsController < ApplicationController
   
   def index
     @products = Product.all    
-    
+    @savedtweets = Savetweets.order("created_at DESC").all
+    @followersdb = Followers.all
+    @trends = Twitter.local_trends(2487956)
     # Post tweets to Twitter
     if session[:user_id] != nil then      
       if params[:my_tweet] != nil then
@@ -16,7 +18,9 @@ class ProductsController < ApplicationController
         #NOTE: there is a created_at value in the hash tag see 
         #https://dev.twitter.com/docs/api/1/get/statuses/home_timeline
         @most_recent_tweets = Twitter.home_timeline(count:3) 
+        #this is grabbing the follower ids
         @followers = Twitter.follower_ids
+        
       end     
     else
       # TODO display an error message
