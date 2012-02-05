@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    session[:user_id] == nil
     Twitter.end_session
     redirect_to root_url, :notice => "Signed out!"
   end

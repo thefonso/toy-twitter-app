@@ -5,6 +5,109 @@
  *= require_self
  *= require_tree . 
 */
+/*for jquery box*/
+html, body {
+ margin: 0;
+ padding: 0;
+ width: 100%;
+ height: 100%;
+ min-height: 100%;
+}
+
+body {
+ position: relative;
+ font: 100% Arial, sans-serif;
+ background: #fff;
+ color: #333;
+}
+
+#overlay {
+ width: 100%;
+ height: 100%;
+ min-height: 100%;
+ background: #666;
+ position: absolute;
+ top: 0;
+ left: 0;
+}
+
+#lightbox {
+ width: 350px;
+ height: 175px;
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ margin: -201px 0 0 -175px;
+ background: #fff;
+ border: 10px solid #999;
+ -moz-box-shadow: 0 0 0 0 #040404;
+ -webkit-box-shadow: 0 0 0 0 #040404;
+ box-shadow: 0px 0px 8px 5px #444,
+			 2px 2px 8px 2px #444;
+}
+
+#lightbox #close {
+ width: 30px;
+ height: 30px;
+ display: block;
+ position: absolute;
+ top: -15px;
+ right: 0;
+ text-indent: -1000em;
+ background: url(close.png) no-repeat;
+}
+
+#lightbox img {
+ width: 90%;
+ margin: 0 auto;
+ display: block;
+ height: 400px;
+ padding: 20px 0 0 0;
+}
+
+#lightbox #signin {
+ width: 328px;
+ margin: 0px 0px 0px 0px;
+ padding: 0px 0px 5px 20px;
+ font-style: normal;
+ text-align: left;
+ border: 0px solid #999;
+}
+
+#lightbox .lblogin{
+	width: 328px;
+	margin: 15px 0px 0px 0px;
+	padding: 0px 20px 20px 0px;
+	border: 0px solid #099908;
+	text-align: right;
+	clear: none;
+	padding-top: 0px;
+}
+#lightbox .tw_signin{
+	width: 328px;
+	margin: 0px auto;
+	padding: 20px 20px 0px 0px;
+	border: 0px solid #991191;
+	text-align: right;
+	clear: none;
+	padding-top: 0px;
+}
+#lightbox .tw_signin_alone{
+	font-size: 2em;
+	width: 328px;
+	margin: 20px auto;
+	padding: 20px 20px 0px 15px; /*TRBL*/
+	border: 0px solid #991191;
+	text-align: center;
+	clear: none;
+	padding-top: 0px;
+}
+#lightbox .title1{
+		color: #DDD;text-shadow: #444 0px 1px 3px,
+								 #444 2px 1px 3px;
+}
+/*for jquery box*/
+
 #header{
 	border: 1px solid #094F99;
 	background-color: #094F99;
@@ -30,15 +133,15 @@
 }
 #wrapper{
 	border: 0px solid #991191;
-/*	width: 100%;*/
-	min-height: 580px;
+	width: 1012px;
+	min-height: 597px;
 /*	this is what centers the content*/
-/*	margin: 0em auto;*/
+	margin: 0em auto;
 }
 #leftside{
 	border: 0px solid #142099;
 	float: left;
-	width: 20%;
+	width: 250px;
 	margin-top: 2em;
 	padding: 2em;
 }
@@ -47,19 +150,18 @@
 	border-left: 1px solid #990316;
 	float: left;
 	min-height: 500px;
-	width: 40%;
-	margin-top: 2em;
+	width: 350px;
+	margin: 0em auto;
+/*	margin-top: 2em;*/
 	padding: 2em;
 /*	margin-bottom: 65px;*/
 }
 #rightside{
 	border: 0px solid #18991E;
 	float: left;
-	width: 20%;
+	width: 250px;
 	margin-top: 2em;
-	padding-top: 2em;
-	padding-left: 2em;
-	padding-right: 0;
+	padding: 2em;
 }
 #footer{
 	border: 1px solid #094F99;

@@ -1,8 +1,7 @@
 
-
 <div id="header">
 	<div class="left">
-		<h1>Toy Twitter App</h1>
+		<h1 class="title1">Toy Twitter App</h1>
 	</div>
 	<div class="right">
 		<!-- in case of some errors display here -->
@@ -11,7 +10,7 @@
 			<%= current_user.name %>
 			<%= link_to "Sign Out", signout_path %>
 		<% else %>
-			<%= link_to "Sign In with Twitter", '/auth/twitter' %>
+			<!-- <%=  link_to "Sign In with Twitter", '/auth/twitter' %> --> 
 		<% end %>
 	</div>	
 </div>
@@ -94,10 +93,37 @@
 			<br />
 		<% end %>
 	</div>
-</div> <!-- wrapper ends -->
+</div> 
+<!-- wrapper ends -->
 <div id="footer">
 	Toy Twitter App brought to you by - <%= link_to "thefonso",'thefonso.com' %>
 </div>
+<!-- lightbox jazz -->
+<script src="lightbox.js"></script>
+<% if session[:user_id] == nil %>
+	<div id="overlay"></div>
+	<div id="lightbox">
+		<a href="#" id="close">Close</a>
+		<div id="signin">
+			<h2 class="title1">Sign In:</h2>
+		</div>
+		<!-- <div id="signin">
+			<%= form_tag do  %>
+				<%= text_field(:post, :title, :size => 55 ) %>
+			<% end %>
+		</div>
+		<div class="lblogin"><%= submit_tag("Login") %></div> -->
+		<div class="tw_signin_alone"><%= link_to "Sign In via Twitter", '/auth/twitter' %></div>
+	</div>
+<% else %>
+<% end %>
+</div>
+
+
+
+
+
+
 
 
 

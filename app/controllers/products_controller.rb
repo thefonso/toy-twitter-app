@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
     @products = Product.all    
     @savedtweets = Savetweets.order("created_at DESC").all
     @followersdb = Followers.all
-    @trends = Twitter.local_trends(2487956)
+    @trends = Twitter.local_trends(2487956) # TODO this is san fran need chicago
     # Post tweets to Twitter
     if session[:user_id] != nil then      
       if params[:my_tweet] != nil then
