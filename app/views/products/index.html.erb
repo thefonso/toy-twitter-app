@@ -81,22 +81,22 @@
 
 	<div id="leftside">
 		<% if current_user%>
-			Mentions:<br />
+			San Fran. Trends:<br />
+			<% Twitter.local_trends(2487956).each do |trend| %> 
+				<%= trend.attrs["name"] %>
+			<% end%>
+			<br/><br />
+			Tweets about me:<br /><br />
 			<% Twitter.mentions(:count => 10).each do |ment| %>
 				<%= ment.attrs["user"]["screen_name"] %> - <%= ment.attrs["text"] %><br /><br />
-			<% end %>
-			<br/><br />
-			San Fran. Trends:<br />
-				<% Twitter.local_trends(2487956).each do |trend| %> 
-					<%= trend.attrs["name"] %>
-				<% end%>
+			<% end %>	
 			<br />
 		<% end %>
 	</div>
 </div> 
 <!-- wrapper ends -->
 <div id="footer">
-	Toy Twitter App brought to you by - <%= link_to "thefonso",'thefonso.com' %>
+	Toy Twitter App brought to you by - <%= link_to "thefonso",'http://www.thefonso.com' %>
 </div>
 <!-- lightbox jazz -->
 <script src="lightbox.js"></script>
