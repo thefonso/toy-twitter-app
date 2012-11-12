@@ -1,6 +1,7 @@
 Birdie::Application.routes.draw do
   
   resources :users
+  resources :products
   
   controller :products do
     post 'tweet' => :index 
@@ -13,6 +14,5 @@ Birdie::Application.routes.draw do
   match '/signout' => 'sessions#destroy', :as => :signout
   
   root to: 'products#index'
-  resources :products
   
 end

@@ -1,3 +1,3 @@
 class User < ActiveRecord::Base
-  #refactor this later
+  #TODO refactor this later
 end

@@ -8,8 +8,8 @@ development:
     encoding: utf8
     database: project_twitter_development
     pool: 5
-    username: postgres
-    password: arrakisworm
+    username: <%= ENV['PG_USERNAME'] %>
+    password: <%= ENV['PG_PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -19,16 +19,16 @@ test: &TEST
     encoding: utf8
     database: project_twitter_test
     pool: 5
-    username: postgres
-    password: arrakisworm
+    username: <%= ENV['PG_USERNAME'] %>
+    password: <%= ENV['PG_PASSWORD'] %>
 
 production:
     adapter: postgresql
     encoding: utf8
     database: project_twitter_production
     pool: 5
-    username: postgres
-    password: arrakisworm
+    username: <%= ENV['PG_USERNAME'] %>
+    password: <%= ENV['PG_PASSWORD'] %>
 
 cucumber:
   <<: *TEST
