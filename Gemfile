@@ -8,7 +8,7 @@ gem 'rails', '3.1.3'
 gem 'pg'
 
 gem 'omniauth-twitter'
-gem 'twitter'
+gem 'twitter', :git => 'https://github.com/sferik/twitter.git', :tag => 'v2.0.2'
 
 # find memory problems
 gem 'oink'
