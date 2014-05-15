@@ -1,6 +1,10 @@
 source 'http://rubygems.org'
+# sets up environment variables located in .env file..
+# must be up top or other gems using env vars will have wrong values
+gem 'dotenv-rails', :groups => [:development, :test]
 
 gem 'rails', '3.1.3'
+
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -8,7 +12,7 @@ gem 'rails', '3.1.3'
 gem 'pg'
 
 gem 'omniauth-twitter'
-gem 'twitter', :git => 'https://github.com/sferik/twitter.git', :tag => 'v2.0.2'
+gem 'twitter', :git => 'https://github.com/sferik/twitter.git', :tag => 'v4.8.1'
 
 # find memory problems
 gem 'oink'
@@ -38,4 +42,9 @@ gem 'jquery-rails'
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
+end
+
+group :development do
+  gem "better_errors"
+  gem "pry-rails"
 end

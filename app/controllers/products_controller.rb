@@ -4,12 +4,14 @@ class ProductsController < ApplicationController
 
   
   def index
-    @products = Product.all    
+    @products    = Product.all    
     @savedtweets = Savetweets.order("created_at DESC").all
     @followersdb = Followers.all
-    @trends = Twitter.local_trends(2487956) # TODO this is san fran need chicago
     # Post tweets to Twitter
-    if session[:user_id] != nil then      
+    if session[:user_id] != nil then
+     
+      @trends    = Twitter.trends(23424977) # TODO this is san fran need chicago
+     
       if params[:my_tweet] != nil then
         #sends only the first 140 chars out to Twitter.
         Twitter.update(params[:my_tweet][0...139])

@@ -1,6 +1,7 @@
 require 'twitter'
 
 class SessionsController < ApplicationController
+ 
   def create
     #this chunk is using OAuth
     data = request.env["omniauth.auth"]
@@ -15,9 +16,8 @@ class SessionsController < ApplicationController
     # Set all necessary auth info (I think these are MY keys that exist in omniauth.rb)
     # NOTE these are for the twitter gem NOT Omniauth
     
-    # TODO how to hide the key and secret lines?...
-    Twitter.consumer_key = 'UkQrfL3DAfoLxzJFkbZbHg'
-    Twitter.consumer_secret = '58pniCwUx67lW7TVR2xGH6qwgznTaWTgeodXZs4bLs8'
+    Twitter.consumer_key = ENV['TWITTER_KEY']
+    Twitter.consumer_secret = ENV['TWITTER_SECRET'] 
     Twitter.oauth_token = data['credentials']['token']
     Twitter.oauth_token_secret = data['credentials']['secret']
     # I don't recall why I put this here for user...

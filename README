@@ -1,3 +1,22 @@
 twitter toy
 Display data on a twitter user name entered into a form field  
 twitter api exercise
+
+installation:
+you will need rvm installed
+
+step 1. bundle install
+
+if you get this coffeescript error...
+Could not find coffee-script-source-1.1.3 in any of the sources
+
+do the following...
+bundle update --source coffee-script-source
+
+after that then
+
+step 2. bundle exec rake db:create
+
+step 3. bundle exec rake db:migrate
+
+step 4. rails s
